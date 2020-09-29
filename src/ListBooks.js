@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Book from './Book'
+import { Link } from 'react-router-dom'
 
 class ListBooks extends Component {
   render() {
@@ -20,10 +21,10 @@ class ListBooks extends Component {
                 <div className="bookshelf-books">
                   <ol className="books-grid">
                   {currentlyReading.map( book => (
-                    <li>
+                    <li key={book.id}>
                       <Book
                         book={book}
-
+                        shelfUpdate={this.props.shelfUpdate}
                       />
                     </li>
                   ))}
@@ -32,13 +33,43 @@ class ListBooks extends Component {
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Want to Read</h2>
-              <Book />
+              <div className="bookshelf-books">
+                <ol className="books-grid">
+                {wantToRead.map( book => (
+                  <li key={book.id}>
+                    <Book
+                      book={book}
+                      shelfUpdate={this.props.shelfUpdate}
+                    />
+                  </li>
+                ))}
+                </ol>
+              </div>
             </div>
             <div className="bookshelf">
               <h2 className="bookshelf-title">Read</h2>
-              <Book />
+              <div className="bookshelf-books">
+                <ol className="books-grid">
+                {read.map( book => (
+                  <li key={book.id}>
+                    <Book
+                      book={book}
+                      shelfUpdate={this.props.shelfUpdate}
+                    />
+                  </li>
+                ))}
+                </ol>
+              </div>
             </div>
           </div>
+        </div>
+
+        <div className="open-search">
+          <Link to='/search'>
+            <button>
+              Add a book
+            </button>
+          </Link>
         </div>
       </div>
       )
