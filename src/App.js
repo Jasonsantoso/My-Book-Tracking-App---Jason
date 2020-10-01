@@ -31,14 +31,17 @@ class BooksApp extends React.Component {
     BooksAPI.update(addedBook, shelf)
       .then( response => {
         addedBook.shelf = shelf
+        
+        let addedBooks = this.state.books.filter( book => book.id !== addedBook.id)
+
+        addedBooks.push(addedBook);
+
+        this.setState({ books: addedBooks })
       }
     )
 
-    let addedBooks = this.state.books.filter( book => book.id !== addedBook.id)
-      addedBooks.push(addedBook);
 
-    this.setState({ books: addedBooks })
-      this.setState({ searchedBooks: [] })
+
     this.componentDidMount()
   }
 
